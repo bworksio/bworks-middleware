@@ -32,9 +32,17 @@ async function getContents (refresh) {
   if (cache.contents && !refresh) {
     return cache.contents
   }
+
   // See https://blog.lavrton.com/javascript-loops-how-to-handle-async-await-6252dd3c795
   const promises = activeLanguages.map(getContentsTranslated)
-  return cache.contents = await Promise.all(promises)
+  const resolved = await Promise.all(promises)
+
+  // Convert array of objects back to objects
+  let contents = {}
+  resolved.forEach(obj => {
+    contents = {...contents, ...obj}
+  })
+  return cache.contents = contents
 }
 
 async function getContentsTranslated (lang) {
