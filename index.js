@@ -2,14 +2,21 @@ const {send} = require('micro')
 const fetch = require('node-fetch')
 const baseUrl = 'https://backend.b-works.io/'
 const activeLanguages = ['de', 'en']
+
+// Simple memory based caching
 const cache = {}
 
+/**
+ * GET /
+ * GET /?refresh
+ */
 module.exports = async (req, res) => {
   if (/favicon.ico/.test(req.url)) {
     return send(res, 404)
   }
 
   const startTime = Date.now()
+  // Check for cache buster flag
   const refresh = /\brefresh\b/.test(req.url)
 
   return {
