@@ -1,0 +1,14 @@
+{
+  "name": "middleware",
+  "scripts": {
+    "start": "micro",
+    "dev": "micro-dev"
+  },
+  "dependencies": {
+    "micro": "latest",
+    "node-fetch": "^2.2.0"
+  },
+  "devDependencies": {
+    "micro-dev": "^3.0.0"
+  }
+}
