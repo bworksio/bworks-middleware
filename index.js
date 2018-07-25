@@ -73,6 +73,7 @@ async function getTags (refresh) {
   // Filter response
   const tags = {}
   Object.keys(response).forEach(key => {
+    tags[key] = {}
     tags[key].name = response[key].name
   })
   return cache.tags = tags
